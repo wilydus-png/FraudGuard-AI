@@ -1,439 +1,483 @@
 
 # 💳 FraudGuard AI
 
-## Sistema inteligente para la detección y análisis de fraude en transacciones con tarjetas de débito
+## Sistema inteligente para la detección y análisis de fraude en transacciones con tarjetas de débito mediante Machine Learning e inteligencia artificial generativa
+
+**Universidad Yachay Tech**  
+Maestría en Ciencia de Datos  
+Asignatura: Fundamentos de Inteligencia Artificial  
+Docente: Manuel Eugenio Morocho Cayamcela, Ph.D.
 
 ---
 
-## 🎓 Información académica
+## 🚀 Aplicación en línea
 
-- **Universidad:** Universidad Yachay Tech
-- **Programa:** Maestría en Ciencia de Datos
-- **Asignatura:** Fundamentos de Inteligencia Artificial
-- **Docente:** Manuel Eugenio Morocho Cayamcela, Ph.D.
-- **Actividad:** Actividad 12 – Implementación y evaluación de un asistente inteligente
-- **Proyecto:** FraudGuard AI
-- **Año:** 2026
+Accede a FraudGuard AI:
+
+https://fraudguard-ai-yachay.streamlit.app
+
+La aplicación está desplegada en Streamlit Community Cloud y permite explorar indicadores de fraude, realizar consultas mediante inteligencia artificial generativa y ejecutar predicciones utilizando un modelo de Machine Learning entrenado.
 
 ---
 
-## 🌐 Acceso a la aplicación
+## 1. Descripción del proyecto
 
-La aplicación se encuentra publicada en Streamlit Community Cloud y puede ser utilizada directamente desde un navegador web.
+FraudGuard AI es un prototipo académico orientado al análisis y detección de operaciones potencialmente fraudulentas realizadas con tarjetas de débito.
 
-### [🚀 Abrir FraudGuard AI](https://fraudguard-ai-yachay.streamlit.app)
+El sistema integra análisis de datos, aprendizaje automático e inteligencia artificial generativa para identificar patrones transaccionales, generar puntuaciones de riesgo y apoyar la priorización de alertas de fraude.
 
-### [📂 Repositorio del proyecto](https://github.com/wilydus-png/FraudGuard-AI)
-
----
-
-## 📌 Descripción del proyecto
-
-FraudGuard AI es una aplicación interactiva desarrollada para analizar transacciones con tarjetas de débito e identificar patrones asociados al fraude financiero mediante herramientas de ciencia de datos e inteligencia artificial.
-
-El sistema integra un dashboard interactivo, indicadores estadísticos y un asistente inteligente basado en modelos de lenguaje, permitiendo explorar los resultados del análisis mediante consultas en lenguaje natural.
-
-La aplicación constituye una primera etapa de un proyecto más amplio orientado a la incorporación de modelos de Machine Learning para la detección de transacciones potencialmente fraudulentas.
+El proyecto busca demostrar cómo la incorporación de características históricas y de comportamiento puede mejorar la capacidad de detección frente a modelos predictivos tradicionales.
 
 ---
 
-## 🎯 Objetivo general
+## 2. Objetivo general
 
-Desarrollar un sistema inteligente que permita analizar patrones de fraude en transacciones con tarjetas de débito mediante técnicas de ciencia de datos, visualización interactiva e inteligencia artificial generativa.
+Desarrollar un sistema inteligente para el análisis y la detección de fraude en transacciones con tarjetas de débito, mediante técnicas de Machine Learning, ingeniería de características e inteligencia artificial generativa, que permita identificar patrones de riesgo y priorizar operaciones para su revisión.
 
 ### Objetivos específicos
 
-- Procesar e integrar información transaccional de un conjunto de datos público.
-- Identificar modalidades, categorías comerciales y períodos con mayores tasas de fraude.
-- Construir un dashboard interactivo para visualizar indicadores financieros.
-- Implementar un asistente inteligente capaz de responder preguntas sobre los indicadores analizados.
-- Evaluar comparativamente dos modelos de lenguaje considerando precisión, relevancia, coherencia y eficiencia computacional.
+- Analizar el comportamiento de las transacciones fraudulentas y legítimas.
+- Construir características predictoras relacionadas con el historial transaccional de las tarjetas y los clientes.
+- Entrenar y comparar modelos de clasificación supervisada.
+- Evaluar el desempeño predictivo y la eficiencia operativa de los modelos.
+- Integrar el modelo seleccionado en una aplicación web interactiva.
+- Implementar un asistente inteligente para consultar indicadores de fraude mediante lenguaje natural.
 
 ---
 
-## 📊 Conjunto de datos
+## 3. Fuente de datos
 
-El proyecto utiliza el conjunto de datos público **Financial Transactions Dataset: Analytics**, disponible en Kaggle.
+Se utiliza el dataset público:
 
-**Fuente:**
+**Financial Transactions Dataset: Analytics**
+
+Disponible en Kaggle:
 
 https://www.kaggle.com/datasets/computingvictor/transactions-fraud-datasets
 
-Para el análisis se seleccionaron exclusivamente transacciones correspondientes a tarjetas de débito, excluyendo tarjetas de crédito y tarjetas prepagadas.
+El conjunto de datos contiene información histórica sobre transacciones financieras, tarjetas, clientes, establecimientos comerciales y etiquetas de fraude.
 
-### Indicadores generales
+Para el desarrollo del proyecto se seleccionaron exclusivamente transacciones con tarjetas de débito, excluyendo tarjetas de crédito y débito prepagadas.
+
+### Resumen del conjunto de datos
 
 | Indicador | Resultado |
-|-----------|----------:|
-| Transacciones analizadas | 5.548.196 |
-| Transacciones fraudulentas | 7.464 |
-| Transacciones legítimas | 5.540.732 |
-| Tasa general de fraude | 0,13453 % |
-| Monto transaccional neto | $218.308.270,15 |
-| Monto fraudulento neto | $839.885,36 |
-| Indicadores agregados | 255 |
+|---|---:|
+| Historial completo de débito | 8.280.996 |
+| Transacciones etiquetadas | 5.548.196 |
+| Transacciones sin etiqueta | 2.732.800 |
+| Transacciones fraudulentas etiquetadas | 7.464 |
+| Transacciones legítimas etiquetadas | 5.540.732 |
+| Tasa general de fraude | 0,1345 % |
 
-Los indicadores se encuentran organizados en cinco dimensiones:
+Las transacciones sin etiqueta se utilizaron para ampliar el historial de comportamiento, sin considerarlas automáticamente como legítimas.
 
-- General.
-- Modalidad transaccional.
-- Categoría comercial MCC.
-- Hora del día.
-- Mes.
+Los datos son de naturaleza sintética y no representan estadísticas oficiales de fraude de Ecuador.
 
 ---
 
-## 📈 Funcionalidades de la aplicación
+## 4. Metodología
 
-### 1. Dashboard interactivo
+El proyecto se desarrolló mediante las siguientes etapas:
 
-Permite visualizar:
+1. Carga, integración y limpieza de datos.
+2. Análisis exploratorio de transacciones.
+3. Identificación de patrones de fraude.
+4. División cronológica de los datos.
+5. Ingeniería de características históricas.
+6. Entrenamiento de modelos de clasificación.
+7. Optimización de hiperparámetros y ponderaciones.
+8. Evaluación de métricas predictivas y operativas.
+9. Selección del modelo y del umbral operativo.
+10. Integración y despliegue en Streamlit.
 
-- Total de transacciones analizadas.
-- Número de transacciones fraudulentas y legítimas.
-- Tasa general de fraude.
-- Monto transaccional neto.
-- Monto fraudulento neto.
-- Tasa de fraude por modalidad transaccional.
-- Top 10 de categorías comerciales MCC con mayor tasa de fraude.
-- Comportamiento del fraude por hora.
-- Evolución mensual del fraude.
+### División cronológica
 
-Las visualizaciones se desarrollaron mediante Plotly.
+| Conjunto | Transacciones | Fraudes |
+|---|---:|---:|
+| Entrenamiento | 3.884.576 | 5.803 |
+| Validación | 832.889 | 464 |
+| Prueba | 830.731 | 1.197 |
+| Total | 5.548.196 | 7.464 |
 
-### 2. Exploración de datos
+La separación cronológica permite estudiar la capacidad del modelo para identificar fraude en períodos posteriores a los utilizados durante el entrenamiento.
 
-La aplicación permite:
-
-- Consultar los indicadores agregados.
-- Filtrar los datos por dimensión.
-- Descargar los indicadores en formato CSV.
-- Cargar archivos CSV adicionales que cumplan con la estructura requerida.
-
-### 3. Asistente inteligente
-
-El asistente permite realizar consultas en lenguaje natural sobre los indicadores disponibles.
-
-Entre sus funcionalidades se incluyen:
-
-- Interpretación de indicadores financieros.
-- Comparación de modalidades transaccionales.
-- Análisis de categorías comerciales MCC.
-- Identificación de patrones temporales.
-- Generación de recomendaciones de monitoreo.
-- Reconocimiento de preguntas fuera del contexto del dataset.
+El preprocesamiento se ajusta sobre los datos de entrenamiento y se aplica posteriormente a validación y prueba.
 
 ---
 
-## 🤖 Modelos de inteligencia artificial
+## 5. Análisis exploratorio de datos
 
-Para la implementación del asistente inteligente se utilizaron dos modelos de lenguaje de pesos abiertos desarrollados por OpenAI y ejecutados mediante la infraestructura de Groq.
+El análisis descriptivo permite identificar patrones asociados con:
 
-| Modelo | Identificador |
-|--------|---------------|
-| GPT-OSS-20B | `openai/gpt-oss-20b` |
-| GPT-OSS-120B | `openai/gpt-oss-120b` |
+- Modalidades transaccionales.
+- Categorías comerciales MCC.
+- Horarios de mayor incidencia de fraude.
+- Evolución mensual del comportamiento fraudulento.
+- Montos transaccionales.
+- Frecuencia de operaciones.
+- Uso habitual de establecimientos comerciales.
+- Cambios en el comportamiento de tarjetas y clientes.
 
-### Proveedor de inferencia
+Uno de los principales hallazgos fue la existencia de cambios temporales en las modalidades de fraude, lo que evidencia la importancia de utilizar características de comportamiento y evaluaciones cronológicas.
 
-**Groq Cloud**
+### Tasa de fraude por modalidad
 
-https://console.groq.com/
+| Modalidad | Tasa de fraude |
+|---|---:|
+| Online | 0,7666 % |
+| Chip | 0,0829 % |
+| Swipe | 0,0282 % |
 
-### Modelos disponibles en Hugging Face
-
-- [GPT-OSS-20B](https://huggingface.co/openai/gpt-oss-20b)
-- [GPT-OSS-120B](https://huggingface.co/openai/gpt-oss-120b)
-
-Inicialmente se configuró la API oficial de OpenAI. Sin embargo, debido a las restricciones de cuota de la cuenta utilizada, se implementó una alternativa mediante Groq.
-
-La solución utiliza la biblioteca OpenAI de Python con una interfaz compatible con Groq, permitiendo ejecutar consultas dentro de los límites del servicio gratuito.
-
----
-
-## 🧪 Actividad 12 – Evaluación comparativa de modelos
-
-Para evaluar el desempeño del asistente inteligente se diseñó un experimento compuesto por ocho preguntas, ejecutadas con cada uno de los dos modelos.
-
-Se realizaron un total de **16 evaluaciones experimentales**.
-
-### Categorías evaluadas
-
-1. Indicadores generales.
-2. Modalidad transaccional.
-3. Categorías comerciales MCC.
-4. Análisis temporal.
-5. Recomendaciones de monitoreo.
-6. Preguntas fuera del contexto.
-7. Información sobre fraude en Ecuador no disponible en los indicadores.
-8. Información sobre Visa Risk Manager no disponible en los indicadores.
-
-### Metodología
-
-Ambos modelos recibieron las mismas preguntas, instrucciones y dimensiones de información.
-
-Se mantuvieron constantes los siguientes parámetros:
-
-- Temperatura: 0,2.
-- Esfuerzo de razonamiento: bajo.
-- Límite máximo de respuesta: 2.048 tokens.
-
-La evaluación consideró:
-
-- Precisión.
-- Relevancia.
-- Coherencia.
-- Tiempo de respuesta.
-- Consumo de tokens.
-- Capacidad para reconocer información no disponible.
+Estos resultados corresponden exclusivamente al dataset analizado.
 
 ---
 
-## 📋 Resultados de la evaluación
+## 6. Ingeniería de características
 
-### Evaluación cuantitativa
+Se desarrolló una segunda versión del conjunto predictivo con 84 características agrupadas en:
 
-| Indicador | GPT-OSS-20B | GPT-OSS-120B |
-|-----------|------------:|-------------:|
-| Consultas completadas | 8 | 8 |
-| Errores de ejecución | 0 | 0 |
-| Ejecución exitosa | 100 % | 100 % |
-| Tiempo promedio de respuesta | 0,7525 s | 1,1842 s |
-| Tokens promedio | 1.559,25 | 1.647,75 |
-| Tokens totales | 12.474 | 13.182 |
+| Grupo | Características |
+|---|---:|
+| Variables originales | 13 |
+| Perfil histórico de tarjeta | 30 |
+| Perfil comercial | 18 |
+| Perfil del cliente | 10 |
+| Aceleración transaccional | 5 |
+| Perfil geográfico | 8 |
+| Total | 84 |
 
-### Evaluación cualitativa
+Las características históricas buscan identificar desviaciones respecto al comportamiento habitual de las tarjetas y clientes.
 
-Se aplicó una rúbrica de evaluación de 10 puntos por respuesta.
+Entre las características más relevantes se encuentran:
 
-| Criterio | Puntaje máximo |
-|----------|---------------:|
-| Precisión | 4 |
-| Relevancia | 3 |
-| Coherencia | 3 |
-| Total | 10 |
+- Número de transacciones previas en un comercio.
+- Frecuencia de operaciones en un comercio durante 90 días.
+- Aceleración del monto transaccional en 24 horas.
+- Frecuencia histórica de categorías MCC.
+- Tiempo desde la transacción anterior.
+- Relación entre el monto actual y los montos históricos.
 
-### Resultados consolidados
-
-| Criterio | GPT-OSS-20B | GPT-OSS-120B |
-|----------|------------:|-------------:|
-| Precisión | 26/32 | 29/32 |
-| Relevancia | 24/24 | 24/24 |
-| Coherencia | 23/24 | 24/24 |
-| Puntaje total | 73/80 | 77/80 |
-| Promedio | 9,125/10 | 9,625/10 |
-| Porcentaje del puntaje máximo | 91,25 % | 96,25 % |
-
-### Principales hallazgos
-
-- Ambos modelos completaron exitosamente todas las consultas.
-- GPT-OSS-20B presentó menores tiempos de respuesta y consumo de tokens.
-- GPT-OSS-120B obtuvo una mayor puntuación cualitativa.
-- Ambos modelos interpretaron correctamente los indicadores generales y temporales.
-- Ambos reconocieron las limitaciones del dataset en las preguntas de control.
-- Se identificaron errores de filtrado, ordenamiento y cálculo de porcentajes, especialmente en consultas relacionadas con categorías comerciales MCC.
-
-Los resultados corresponden exclusivamente a las preguntas evaluadas y no representan una medición general del rendimiento de los modelos.
+El modelo final utiliza una selección de 69 características predictoras.
 
 ---
 
-## 🔍 Principales hallazgos del análisis de fraude
+## 7. Modelos de Machine Learning
 
-### Fraude por modalidad
+Se evaluaron diferentes técnicas de clasificación supervisada:
 
-Las transacciones Online presentan la mayor tasa de fraude del conjunto de datos analizado.
+- Regresión logística base.
+- Regresión logística con historial.
+- Red neuronal Perceptrón Multicapa (MLP).
+- XGBoost con características históricas.
+- XGBoost con perfil completo.
+- XGBoost con características de comportamiento.
+- XGBoost con diferentes tamaños de muestra y ponderaciones.
 
-Este resultado evidencia la importancia de fortalecer el análisis y monitoreo de las transacciones no presenciales.
+El proceso experimental permitió identificar que la ingeniería de características históricas y comerciales produjo una mejora sustancial en la capacidad predictiva.
 
-### Categorías comerciales con mayor tasa de fraude
+### Modelo seleccionado
 
-Para categorías con al menos 1.000 transacciones:
+**XGB-5 — Ponderación moderada**
 
-| MCC | Tasa de fraude |
-|-----|---------------:|
-| 5045 | 11,2512 % |
-| 5732 | 8,8544 % |
-| 5712 | 7,4186 % |
-| 5816 | 6,8657 % |
-| 5094 | 5,8882 % |
+Características del entrenamiento:
 
-### Comportamiento temporal
+| Parámetro | Valor |
+|---|---:|
+| Algoritmo | XGBoost |
+| Variables predictoras | 69 |
+| Transacciones legítimas de entrenamiento | 1.000.000 |
+| Transacciones fraudulentas de entrenamiento | 5.803 |
+| Total de registros de entrenamiento | 1.005.803 |
+| Peso de clase positiva | 13,1272 |
+| Umbral operativo equilibrado | 0,413096 |
 
-Las dos horas con mayor tasa de fraude fueron:
+El modelo genera una puntuación relativa de riesgo para cada transacción.
 
-| Hora | Tasa de fraude |
-|------|---------------:|
-| 11:00 | 0,234318 % |
-| 10:00 | 0,233861 % |
-
-Estos horarios corresponden a los registros del dataset y no deben interpretarse directamente como horarios de mayor riesgo en Ecuador.
-
----
-
-## 🛠️ Tecnologías utilizadas
-
-| Tecnología | Aplicación |
-|------------|------------|
-| Python | Desarrollo del proyecto |
-| Pandas | Procesamiento y análisis de datos |
-| NumPy | Operaciones numéricas |
-| DuckDB | Procesamiento de grandes volúmenes de datos |
-| Plotly | Visualizaciones interactivas |
-| Streamlit | Desarrollo de la aplicación web |
-| Groq API | Inferencia de modelos de lenguaje |
-| GPT-OSS-20B | Asistente inteligente |
-| GPT-OSS-120B | Modelo comparativo |
-| GitHub | Control de versiones |
-| Streamlit Community Cloud | Despliegue de la aplicación |
+Las puntuaciones no representan probabilidades calibradas de fraude.
 
 ---
 
-## 📂 Estructura del repositorio
+## 8. Resultados del modelo predictivo
+
+El modelo seleccionado fue evaluado sobre 830.731 transacciones correspondientes al período comprendido entre junio de 2018 y octubre de 2019.
+
+### Métricas finales
+
+| Indicador | Resultado |
+|---|---:|
+| ROC-AUC | 0,931422 |
+| Average Precision | 0,096328 |
+| Precision | 6,9266 % |
+| Recall | 34,5865 % |
+| F1-score | 0,115417 |
+| Fraudes existentes | 1.197 |
+| Fraudes detectados | 414 |
+| Fraudes no detectados | 783 |
+| Falsos positivos | 5.563 |
+| Total alertas | 5.977 |
+| Tasa de alertas | 0,7195 % |
+
+### Matriz de confusión
+
+| Clase real | Sin alerta | Revisión requerida |
+|---|---:|---:|
+| Legítima | 823.971 | 5.563 |
+| Fraudulenta | 783 | 414 |
+
+El modelo permite identificar más de un tercio de los fraudes revisando menos del 1 % de las operaciones, utilizando el umbral equilibrado seleccionado en validación.
+
+---
+
+## 9. Comparación con el modelo inicial
+
+| Indicador | MLP inicial | XGB-5 |
+|---|---:|---:|
+| ROC-AUC | 0,7680 | 0,9314 |
+| Precision | 0,81 % | 6,93 % |
+| Recall | 14,70 % | 34,59 % |
+| Fraudes detectados | 176 | 414 |
+| Falsos positivos | 21.521 | 5.563 |
+| Total alertas | 21.697 | 5.977 |
+
+Principales mejoras:
+
+- Incremento del 135,23 % en los fraudes detectados.
+- Reducción del 74,15 % en los falsos positivos.
+- Reducción del 72,45 % en el volumen de alertas.
+- Mejora considerable en la capacidad de discriminación.
+
+Los resultados respaldan la importancia de incorporar perfiles históricos y comerciales al desarrollo de modelos de fraude.
+
+---
+
+## 10. Evaluación según capacidad operativa
+
+Se evaluó la capacidad de priorización del modelo mediante diferentes porcentajes de transacciones revisadas.
+
+| Operaciones revisadas | Alertas | Fraudes detectados | Precision | Recall |
+|---|---:|---:|---:|---:|
+| 0,1 % | 831 | 166 | 19,98 % | 13,87 % |
+| 0,5 % | 4.154 | 359 | 8,64 % | 29,99 % |
+| 1 % | 8.307 | 481 | 5,79 % | 40,18 % |
+| 2 % | 16.615 | 649 | 3,91 % | 54,22 % |
+| 5 % | 41.537 | 879 | 2,12 % | 73,43 % |
+
+Al revisar únicamente el 1 % de las transacciones con mayor puntuación de riesgo, el modelo identifica el 40,18 % de los fraudes del conjunto de prueba.
+
+Esta evaluación demuestra la utilidad del modelo para priorizar operaciones bajo capacidades limitadas de revisión.
+
+Los escenarios Top-K corresponden a evaluaciones retrospectivas de priorización y no a garantías de desempeño futuro.
+
+---
+
+## 11. Inteligencia artificial generativa
+
+FraudGuard AI incorpora un asistente inteligente que permite realizar consultas en lenguaje natural sobre los indicadores del dataset.
+
+Se utilizan dos modelos:
+
+- openai/gpt-oss-20b
+- openai/gpt-oss-120b
+
+Ambos modelos son ejecutados mediante la API de Groq.
+
+El asistente permite:
+
+- Consultar indicadores generales de fraude.
+- Comparar modalidades transaccionales.
+- Identificar categorías comerciales de mayor riesgo.
+- Analizar patrones horarios y temporales.
+- Generar recomendaciones de monitoreo basadas en los datos disponibles.
+
+Durante el desarrollo se realizaron 16 consultas experimentales, correspondientes a ocho preguntas evaluadas con cada modelo.
+
+La evaluación considera precisión factual, pertinencia, coherencia y capacidad para reconocer información no disponible.
+
+El asistente generativo no sustituye al modelo predictivo. Las puntuaciones de riesgo son calculadas directamente mediante XGBoost.
+
+---
+
+## 12. Funcionalidades de la aplicación
+
+La aplicación FraudGuard AI está organizada en cuatro módulos principales.
+
+### Dashboard
+
+Visualización interactiva de los principales indicadores de fraude.
+
+### Datos
+
+Exploración, filtrado y descarga de indicadores transaccionales.
+
+### Asistente inteligente
+
+Consultas en lenguaje natural mediante modelos GPT-OSS ejecutados a través de Groq.
+
+### Modelo predictivo
+
+Evaluación de transacciones mediante el modelo XGB-5.
+
+Permite:
+
+- Analizar transacciones de demostración.
+- Cargar archivos CSV con las características requeridas.
+- Seleccionar diferentes escenarios operativos.
+- Generar puntuaciones de riesgo.
+- Clasificar operaciones que requieren revisión.
+- Visualizar el ranking de transacciones.
+- Consultar la matriz de confusión cuando existen etiquetas reales.
+- Descargar los resultados predictivos.
+
+---
+
+## 13. Validación funcional en Streamlit Cloud
+
+Se verificó el funcionamiento del modelo exportado mediante una muestra reproducible de 5.000 transacciones del conjunto de prueba.
+
+| Indicador | Resultado |
+|---|---:|
+| Transacciones evaluadas | 5.000 |
+| Fraudes existentes | 8 |
+| Alertas generadas | 38 |
+| Fraudes detectados | 4 |
+| Falsos positivos | 34 |
+| Fraudes no detectados | 4 |
+| Precision | 10,53 % |
+| Recall | 50,00 % |
+| F1-score | 0,1739 |
+
+Los resultados obtenidos en Streamlit Community Cloud coinciden con los resultados de la aplicación ejecutada localmente.
+
+Esta prueba verifica la reproducibilidad funcional del modelo desplegado.
+
+Las métricas de la muestra de demostración no sustituyen los resultados de la evaluación retrospectiva completa.
+
+---
+
+## 14. Tecnologías utilizadas
+
+- Python
+- Pandas
+- NumPy
+- DuckDB
+- Scikit-learn
+- XGBoost
+- Joblib
+- Plotly
+- Streamlit
+- Groq API
+- GPT-OSS
+- GitHub
+- Streamlit Community Cloud
+
+---
+
+## 15. Estructura del repositorio
 
 ```text
 FraudGuard-AI/
 │
 ├── app.py
+├── modulo_predictivo.py
 ├── requirements.txt
 ├── README.md
 │
-└── procesados/
-    └── indicadores_fraudguard.csv
+├── procesados/
+│   └── indicadores_fraudguard.csv
+│
+└── modelo_predictivo/
+    ├── fraudguard_xgb5.json
+    ├── preprocesador_xgb5.joblib
+    ├── configuracion_xgb5.json
+    └── transacciones_demo.csv
 ```
-
-### Descripción de los archivos
-
-- **app.py:** código principal del dashboard y asistente inteligente.
-- **requirements.txt:** dependencias necesarias para ejecutar la aplicación.
-- **README.md:** documentación general del proyecto.
-- **indicadores_fraudguard.csv:** indicadores agregados utilizados por la aplicación.
-
-Los archivos originales de transacciones y las bases de procesamiento no se incluyen en este repositorio debido a su tamaño.
 
 ---
 
-## ⚙️ Instalación y ejecución local
+## 16. Instalación y ejecución local
 
-### 1. Clonar el repositorio
+Clonar el repositorio:
 
 ```bash
 git clone https://github.com/wilydus-png/FraudGuard-AI.git
 ```
 
-### 2. Ingresar a la carpeta del proyecto
+Ingresar a la carpeta:
 
 ```bash
 cd FraudGuard-AI
 ```
 
-### 3. Instalar las dependencias
+Instalar las dependencias:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configurar la API Key de Groq
-
-Crear la carpeta:
+Configurar la clave privada de Groq mediante el archivo:
 
 ```text
-.streamlit
+.streamlit/secrets.toml
 ```
 
-Dentro de esta carpeta, crear el archivo:
-
-```text
-secrets.toml
-```
-
-Agregar el siguiente contenido:
+Contenido:
 
 ```toml
-GROQ_API_KEY = "TU_CLAVE_PRIVADA_DE_GROQ"
+GROQ_API_KEY = "TU_CLAVE_PRIVADA"
 ```
 
-La clave debe obtenerse desde:
-
-https://console.groq.com/keys
-
-**Importante:** no publicar el archivo `secrets.toml` ni compartir la clave privada.
-
-### 5. Ejecutar la aplicación
+Ejecutar la aplicación:
 
 ```bash
-python -m streamlit run app.py
+streamlit run app.py
 ```
 
-La aplicación estará disponible normalmente en:
+El módulo predictivo no requiere una clave de Groq para ejecutar el modelo XGBoost.
 
-```text
-http://localhost:8501
-```
+La clave es necesaria únicamente para utilizar el asistente generativo.
 
----
-
-## ☁️ Despliegue en la nube
-
-La aplicación se encuentra desplegada en Streamlit Community Cloud.
-
-El proceso de publicación se realizó mediante:
-
-1. Creación del repositorio en GitHub.
-2. Publicación del código fuente y los indicadores agregados.
-3. Configuración de las dependencias.
-4. Configuración segura de la API Key de Groq.
-5. Despliegue de la aplicación.
-
-**Aplicación publicada:**
-
-https://fraudguard-ai-yachay.streamlit.app
+Las credenciales privadas no deben publicarse en GitHub.
 
 ---
 
-## 📝 Conclusiones
+## 17. Limitaciones
 
-FraudGuard AI demuestra la integración de técnicas de ciencia de datos e inteligencia artificial generativa para facilitar el análisis de fraude en transacciones con tarjetas de débito.
+- El dataset utilizado es sintético y no representa directamente el comportamiento de fraude de una institución financiera ecuatoriana.
+- El conjunto de datos presenta un elevado desbalance entre transacciones legítimas y fraudulentas.
+- Existen cambios temporales en los patrones de fraude.
+- Las puntuaciones de riesgo no están calibradas como probabilidades reales de fraude.
+- El modelo requiere características históricas previamente calculadas.
+- La evaluación final es retrospectiva y el conjunto de prueba fue examinado durante etapas anteriores del proyecto.
+- No se realizó una validación externa sobre datos reales de otra institución financiera.
+- El asistente generativo puede producir respuestas incorrectas y requiere verificación de sus resultados.
 
-La comparación experimental permitió identificar que GPT-OSS-20B presenta una mayor eficiencia en tiempo de respuesta y consumo de tokens, mientras que GPT-OSS-120B obtuvo una mejor puntuación cualitativa en las consultas evaluadas.
+FraudGuard AI constituye un prototipo académico de apoyo al monitoreo transaccional.
 
-Sin embargo, ambos modelos presentaron limitaciones relacionadas con operaciones de filtrado, ordenamiento y cálculos porcentuales.
-
-Por esta razón, se propone complementar los modelos de lenguaje con operaciones estadísticas determinísticas realizadas mediante Python, Pandas o DuckDB, permitiendo que la inteligencia artificial generativa se concentre principalmente en interpretar y explicar resultados previamente calculados.
-
----
-
-## 🚀 Trabajos futuros
-
-Como parte de las siguientes etapas del proyecto se propone:
-
-- Implementar modelos de Machine Learning para la detección de fraude.
-- Evaluar modelos de regresión logística y redes neuronales.
-- Incorporar métricas adecuadas para conjuntos de datos desbalanceados.
-- Integrar predicciones de riesgo transaccional en la aplicación.
-- Mejorar la precisión del chatbot mediante cálculos determinísticos.
-- Implementar mecanismos de validación automática de respuestas.
-- Desplegar y evaluar la aplicación en AWS.
-- Incorporar controles de acceso y límites de consultas para proteger los recursos de inferencia.
+No debe utilizarse como un sistema autónomo de autorización, rechazo o bloqueo de operaciones financieras.
 
 ---
 
-## ⚠️ Consideraciones y limitaciones
+## 18. Conclusiones
 
-Este proyecto tiene fines exclusivamente académicos.
+El desarrollo de FraudGuard AI permitió demostrar la utilidad de combinar análisis exploratorio, ingeniería de características, aprendizaje automático e inteligencia artificial generativa para el estudio del fraude financiero.
 
-Los resultados corresponden a un conjunto de datos público y no representan estadísticas oficiales del sistema financiero ecuatoriano ni pérdidas financieras confirmadas.
+La incorporación de características relacionadas con el comportamiento histórico de las tarjetas, clientes y comercios permitió mejorar sustancialmente el desempeño de los modelos iniciales.
 
-Los modelos de lenguaje pueden generar respuestas incorrectas, por lo que sus resultados deben contrastarse con los indicadores originales.
+El modelo XGB-5 alcanzó un ROC-AUC de 0,9314 y permitió detectar 414 fraudes generando 5.977 alertas sobre el conjunto de prueba.
 
-La evaluación experimental se realizó con ocho preguntas por modelo y una única ejecución de cada pregunta.
+Asimismo, la evaluación por capacidad operativa mostró que es posible detectar el 40,18 % de los fraudes revisando únicamente el 1 % de las operaciones con mayor puntuación de riesgo.
 
-Actualmente, la aplicación permite analizar e interpretar indicadores históricos. El componente de predicción de fraude mediante Machine Learning se encuentra contemplado como una etapa posterior del proyecto.
+La implementación en Streamlit Community Cloud demuestra la viabilidad técnica de integrar los componentes descriptivos, predictivos y generativos en una aplicación web funcional.
+
+Como trabajos futuros se propone realizar validaciones con datos reales, mejorar la calibración de puntuaciones, incorporar mecanismos de monitoreo temporal y desarrollar estrategias de optimización basadas en los costos financieros del fraude.
 
 ---
 
-## 🎓 Créditos académicos
+## Proyecto académico
 
-Proyecto desarrollado en el marco de la asignatura Fundamentos de Inteligencia Artificial de la Maestría en Ciencia de Datos de la Universidad Yachay Tech.
+Universidad Yachay Tech  
+Maestría en Ciencia de Datos  
+Fundamentos de Inteligencia Artificial  
 
-**FraudGuard AI — Ciencia de datos e inteligencia artificial aplicadas al análisis de fraude financiero.**
-
+FraudGuard AI — 2026
