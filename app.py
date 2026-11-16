@@ -22,6 +22,7 @@ from openai import OpenAI
 from time import perf_counter
 import hashlib
 import unicodedata
+from modulo_predictivo import mostrar_modulo_predictivo
 
 
 # ============================================================
@@ -591,16 +592,24 @@ st.success(
 
 
 # ============================================================
-# 9. CREACIÓN DE PESTAÑAS
+
 # ============================================================
 
-tab_dashboard, tab_datos, tab_chat = st.tabs(
-    [
-        "📊 Dashboard",
-        "📁 Datos",
-        "🤖 Asistente inteligente"
-    ]
-)
+# ============================================================
+# 9. CREACIÓN DE PESTAÑAS PRINCIPALES
+# ============================================================
+
+tab_dashboard, tab_datos, tab_chat, tab_predictivo = st.tabs([
+
+    "📊 Dashboard",
+
+    "📁 Datos",
+
+    "🤖 Asistente inteligente",
+
+    "🛡️ Modelo predictivo"
+
+])
 
 
 # ============================================================
@@ -2066,6 +2075,15 @@ st.caption(
     "Universidad Yachay Tech | "
     "Fundamentos de Inteligencia Artificial"
 )
+
+# ============================================================
+# MÓDULO PREDICTIVO DE FRAUDE
+# ============================================================
+
+with tab_predictivo:
+
+    mostrar_modulo_predictivo()
+
 
 # ============================================================
 # FIN DE LA APLICACIÓN
